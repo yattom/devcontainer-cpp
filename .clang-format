@@ -1,0 +1,8 @@
+# C++ の整形規則。
+# エディタ（C/C++ 拡張の保存時整形）と、コンテナ内の clang-format コマンドの
+# 両方がこのファイルを読むので、どちらで整形しても同じ結果になる。
+---
+Language: Cpp
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 100

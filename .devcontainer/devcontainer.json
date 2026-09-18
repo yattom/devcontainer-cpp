@@ -11,39 +11,46 @@
   },
   "customizations": {
     "vscode": {
+      // バージョンは安定版（pre-release ではないもの）で固定する。
+      // 拡張パック（ms-vscode.cpptools-extension-pack）を指定すると中身の
+      // バージョンが固定されないため、中身を個別に並べている。
+      // 変更するときは README の一覧も合わせること。
       "extensions": [
         // ========================================
         // Essential: C++ Development
         // ========================================
-        "ms-vscode.cpptools-extension-pack",
-        "EditorConfig.EditorConfig",
+        "ms-vscode.cpptools@1.34.4",
+        "ms-vscode.cmake-tools@1.24.42",
 
         // ========================================
         // Essential: Documentation
         // ========================================
-        "yzhang.markdown-all-in-one",
-        "DavidAnson.vscode-markdownlint",
+        "yzhang.markdown-all-in-one@3.6.3",
+        "DavidAnson.vscode-markdownlint@0.62.1",
 
         // ========================================
         // Essential: Code Quality
         // ========================================
-        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker@4.9.3",
+        "usernamehw.errorlens@3.28.0",
 
         // ========================================
-        // Recommended: Additional Tools
+        // Recommended: Git
         // ========================================
-        "mhutchie.git-graph",
-        "eamodio.gitlens",
-        "usernamehw.errorlens",
-        "Gruntfuggly.todo-tree",
-        "redhat.vscode-yaml",
+        "eamodio.gitlens@19.2.0",
 
         // ========================================
         // Collaboration: Live Share
         // ========================================
-        "MS-vsliveshare.vsliveshare"
+        "MS-vsliveshare.vsliveshare@1.1.122"
       ],
       "settings": {
+        // ========================================
+        // Extensions
+        // ========================================
+        // 上でバージョンを固定しているので、自動更新で上書きさせない
+        "extensions.autoUpdate": false,
+
         // ========================================
         // Live Share
         // ========================================
@@ -53,7 +60,7 @@
         "liveshare.guestApprovalRequired": true,
         "liveshare.anonymousGuestApproval": "prompt",
         "liveshare.connectionMode": "auto",
-        // 参加者にもホストのターミナルを表示する（読み取り専用が既定）
+        // ステータスバーに Live Share の項目を常に表示する
         "liveshare.showInStatusBar": "always"
       }
     }

@@ -1,0 +1,21 @@
+# clang-tidy の検査規則。
+# エディタ（C/C++ 拡張の Code Analysis）と、コンテナ内の clang-tidy コマンドの
+# 両方がこのファイルを読む。
+#
+# 指摘が多すぎると練習の邪魔になるので、減らすときは Checks から
+# カテゴリごと外すのが手軽（例: readability-* を消す）。
+---
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type
+
+# 自分のヘッダだけを対象にする（build/_deps 以下の GoogleTest は対象外）
+HeaderFilterRegex: '.*/src/.*'
+
+# --fix したあとの整形は .clang-format に従わせる
+FormatStyle: file

@@ -50,6 +50,8 @@ src/hello_world.{h,cpp}      動作確認用の最小コード
 tests/hello_world_test.cpp   GoogleTest の最小テスト
 tests/gmock_examples_test.cpp GoogleMock の stub / mock / spy の例
 CMakeLists.txt               ビルド定義と GoogleTest の取得・ピン留め
+.clang-format                整形規則。エディタと clang-format コマンドが共用する
+.clang-tidy                  静的解析の検査規則。エディタと clang-tidy コマンドが共用する
 ```
 
 ### 練習の題材
@@ -109,21 +111,43 @@ TZ=Asia/Tokyo
 - **ビルド・開発**: build-essential (g++, make), cmake, ninja-build, gdb,
   clang-format, clang-tidy
 
+clang-format と clang-tidy の設定はリポジトリ直下の `.clang-format` /
+`.clang-tidy` にある。エディタ（C/C++ 拡張）もコマンドラインもこの2つを
+読むので、どちらで実行しても同じ結果になる。
+
+```bash
+clang-format -i src/bad/trainroute/domain/route_searcher.cpp   # 整形
+clang-tidy -p build src/bad/trainroute/domain/route_searcher.cpp   # 静的解析
+```
+
+VS Code では保存時に自動で整形され、clang-tidy の指摘は「問題」パネルと
+Error Lens でコード上に表示される。指摘が多すぎるときは `.clang-tidy` の
+`Checks` からカテゴリごと外す。
+
 ### VS Code 拡張機能
 
-- **C/C++ Extension Pack** (`ms-vscode.cpptools-extension-pack`)
-  - C/C++ (IntelliSense, デバッグ)
-  - CMake Tools
-- **EditorConfig** (`EditorConfig.EditorConfig`)
-- **Markdown All in One** (`yzhang.markdown-all-in-one`)
-- **Markdown Lint** (`DavidAnson.vscode-markdownlint`)
-- **Code Spell Checker** (`streetsidesoftware.code-spell-checker`)
-- **Git Graph** (`mhutchie.git-graph`)
-- **GitLens** (`eamodio.gitlens`) - 行単位の履歴 / blame
-- **Error Lens** (`usernamehw.errorlens`) - 診断をコード行に直接表示
-- **Todo Tree** (`Gruntfuggly.todo-tree`) - TODO / FIXME の一覧表示
-- **YAML** (`redhat.vscode-yaml`) - CI 設定の補完
-- **Live Share** (`MS-vsliveshare.vsliveshare`) - ペアプロ / モブプロ
+`.devcontainer/devcontainer.json` でバージョンまで固定してある。
+
+| 拡張機能 | ID | バージョン | 用途 |
+|---|---|---|---|
+| C/C++ | `ms-vscode.cpptools` | 1.34.4 | IntelliSense / デバッグ / 整形 / clang-tidy |
+| CMake Tools | `ms-vscode.cmake-tools` | 1.24.42 | 構成・ビルド・CTest 実行 |
+| Markdown All in One | `yzhang.markdown-all-in-one` | 3.6.3 | 目次・表の整形 |
+| Markdown Lint | `DavidAnson.vscode-markdownlint` | 0.62.1 | Markdown の書式チェック |
+| Code Spell Checker | `streetsidesoftware.code-spell-checker` | 4.9.3 | 綴りチェック |
+| Error Lens | `usernamehw.errorlens` | 3.28.0 | 診断をコード行に直接表示 |
+| GitLens | `eamodio.gitlens` | 19.2.0 | 行単位の履歴 / blame / コミットグラフ |
+| Live Share | `MS-vsliveshare.vsliveshare` | 1.1.122 | ペアプロ / モブプロ |
+
+固定した版が自動更新で上書きされないよう、コンテナ側で
+`"extensions.autoUpdate": false` にしてある。
+
+拡張パック (`ms-vscode.cpptools-extension-pack`) は使っていない。パックの
+バージョンを固定しても中身の拡張のバージョンは固定されないため、中身を
+個別に並べている。
+
+CMake の構文ハイライトとテストエクスプローラ（CTest 連携）は CMake Tools が
+持っているので、別途 `twxs.cmake` や TestMate C++ を入れる必要はない。
 
 ### Live Share を使う
 
@@ -163,8 +187,12 @@ add_executable(unit_tests
 ### 拡張機能を追加
 
 `.devcontainer/devcontainer.json` の `customizations.vscode.extensions` に
-拡張機能の ID を追加し、Command Palette から
-`Dev Containers: Rebuild Container` を実行する。
+`publisher.name@1.2.3` の形で ID とバージョンを追加し、Command Palette から
+`Dev Containers: Rebuild Container` を実行する。あわせて上記の一覧表も更新する。
+
+バージョンは pre-release ではない安定版を選ぶこと。マーケットプレイスが
+「最新」として出すものが pre-release のことがある（例: C/C++ 拡張は
+奇数マイナー版が pre-release）。
 
 ### C++ の規格を変える
 

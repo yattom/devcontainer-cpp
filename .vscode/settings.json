@@ -1,6 +1,8 @@
 {
   "cSpell.words": [
     "Anson",
+    "bugprone",
+    "clang",
     "cmake",
     "cpptools",
     "ctest",
@@ -8,23 +10,18 @@
     "dpkg",
     "eamodio",
     "errorlens",
-    "getent",
     "gitlens",
     "gmock",
     "googlemock",
     "googletest",
-    "Gruntfuggly",
     "gtest",
     "htop",
     "liveshare",
     "localtime",
-    "mhutchie",
     "ninja",
     "noninteractive",
     "NOPASSWD",
-    "oneline",
     "procps",
-    "pthread",
     "stdexcept",
     "trainroute",
     "tzdata",
@@ -42,7 +39,9 @@
   // C/C++ 拡張。compile_commands.json はビルド時に生成される
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 100 }",
+  // 整形規則はリポジトリ直下の .clang-format に置いてある
+  // 静的解析を有効にする。検査規則はリポジトリ直下の .clang-tidy に置いてある
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
   // Editor: 保存時に整形する
   "editor.formatOnSave": true,
   "[cpp]": {
@@ -56,11 +55,5 @@
   // Live Share でペアプロ中に見やすくする
   "editor.rulers": [
     100
-  ],
-  "todo-tree.general.tags": [
-    "TODO",
-    "FIXME",
-    "NOTE",
-    "HACK"
   ]
 }
