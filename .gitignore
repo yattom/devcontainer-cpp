@@ -1,0 +1,28 @@
+# CMake のビルドディレクトリ
+build/
+cmake-build-*/
+
+# CMake が生成するファイル
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
+compile_commands.json
+_deps/
+
+# オブジェクトファイル / ライブラリ / 実行ファイル
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.exe
+
+# デバッグ情報
+*.dSYM/
+core
+
+# ログ
+*.log
+
+# Claude Code の作業ディレクトリ
+.claude/

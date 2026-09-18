@@ -1,0 +1,66 @@
+{
+  "cSpell.words": [
+    "Anson",
+    "cmake",
+    "cpptools",
+    "ctest",
+    "devcontainer",
+    "dpkg",
+    "eamodio",
+    "errorlens",
+    "getent",
+    "gitlens",
+    "gmock",
+    "googlemock",
+    "googletest",
+    "Gruntfuggly",
+    "gtest",
+    "htop",
+    "liveshare",
+    "localtime",
+    "mhutchie",
+    "ninja",
+    "noninteractive",
+    "NOPASSWD",
+    "oneline",
+    "procps",
+    "pthread",
+    "stdexcept",
+    "trainroute",
+    "tzdata",
+    "usermod",
+    "usernamehw",
+    "vscode",
+    "vsliveshare",
+    "yzhang",
+    "zoneinfo"
+  ],
+  // CMake Tools
+  "cmake.generator": "Ninja",
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "cmake.configureOnOpen": true,
+  // C/C++ 拡張。compile_commands.json はビルド時に生成される
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 100 }",
+  // Editor: 保存時に整形する
+  "editor.formatOnSave": true,
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  // ファイル整形の共通ルール（OS 差分による差分ノイズを防ぐ）
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  // Live Share でペアプロ中に見やすくする
+  "editor.rulers": [
+    100
+  ],
+  "todo-tree.general.tags": [
+    "TODO",
+    "FIXME",
+    "NOTE",
+    "HACK"
+  ]
+}

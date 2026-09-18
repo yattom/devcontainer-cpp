@@ -1,0 +1,63 @@
+{
+  "name": "CMake with C++ DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "CMAKE_GENERATOR": "Ninja",
+    "LANG": "ja_JP.UTF-8",
+    "TZ": "Asia/Tokyo"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // ========================================
+        // Essential: C++ Development
+        // ========================================
+        "ms-vscode.cpptools-extension-pack",
+        "EditorConfig.EditorConfig",
+
+        // ========================================
+        // Essential: Documentation
+        // ========================================
+        "yzhang.markdown-all-in-one",
+        "DavidAnson.vscode-markdownlint",
+
+        // ========================================
+        // Essential: Code Quality
+        // ========================================
+        "streetsidesoftware.code-spell-checker",
+
+        // ========================================
+        // Recommended: Additional Tools
+        // ========================================
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "usernamehw.errorlens",
+        "Gruntfuggly.todo-tree",
+        "redhat.vscode-yaml",
+
+        // ========================================
+        // Collaboration: Live Share
+        // ========================================
+        "MS-vsliveshare.vsliveshare"
+      ],
+      "settings": {
+        // ========================================
+        // Live Share
+        // ========================================
+        // 安定版の機能セットのみを使う
+        "liveshare.featureSet": "stable",
+        // 参加者を都度承認してから接続させる
+        "liveshare.guestApprovalRequired": true,
+        "liveshare.anonymousGuestApproval": "prompt",
+        "liveshare.connectionMode": "auto",
+        // 参加者にもホストのターミナルを表示する（読み取り専用が既定）
+        "liveshare.showInStatusBar": "always"
+      }
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "bash -c 'echo \"=== Environment Setup Verification ===\" && echo && echo \"=== Compiler ===\" && g++ --version | head -1 && echo && echo \"=== CMake / Ninja ===\" && cmake --version | head -1 && ninja --version && echo && echo \"=== Timezone ===\" && date && echo && echo \"=== Locale ===\" && locale && echo && echo \"=== Configure & Build ===\" && cmake -S . -B build && cmake --build build'"
+}
